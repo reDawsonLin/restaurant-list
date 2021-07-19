@@ -24,9 +24,11 @@
 
 ### 安裝步驟
 1. 按下此頁面Code按鈕後，複製本專案的URL
-2. 打開終端機(terminal)，Clone本專案 git clone https://github.com/reDawsonLin/AC_2-3_restaurantList.git
-3. 進入存放專案的資料夾 cd restaurant_list
-4. 在終端機，輸入 npm i
-5. 在終端機，輸入 npm install nodemon 
-6. 在終端機，輸入 npm run dev 
-7. 在網頁，輸入網址：localhost:3000
+2. 打開終端機(terminal)，Clone本專案 git clone https://github.com/reDawsonLin/restaurant-list-CRUD.git
+3. 進入存放專案的資料夾 cd restaurant-list-CRUD
+4. 安裝環境，在終端機輸入 npm i 
+5. 安裝套件，在終端機輸入 npm i express express-handlebars body-parser mongoose
+7. 在終端機，輸入 npm run dev 
+8. 在網頁，輸入網址：localhost:3000
+
+![FireShot Capture 071 - Restaurant List - localhost](https://user-images.githubusercontent.com/85107053/126197500-bbf4e94a-fba2-470e-8558-cf881d979be6.png)
