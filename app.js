@@ -95,9 +95,8 @@ app.get('/restaurants/searches', (req, res) => {
 
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
-  console.log(id)
 
-  return Restaurant.findById(id)
+  return Restaurant.findOne({ id: id })
     .lean()
     .then((restaurant) => res.render('show', { restaurant }))
     .catch(error => console.log(error))
