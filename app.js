@@ -70,7 +70,7 @@ app.post('/restaurants', (req, res) => {
 
 app.post('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-  return Restaurant.findOne({ id: id })
+  return Restaurant.findById(id)
     .then(restaurant => {
       restaurant.name = req.body.name
       restaurant.name_en = req.body.name_en
@@ -87,6 +87,16 @@ app.post('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error)) 
 })
 
+
+
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
+})
 
 
 app.get('/restaurants/searches', (req, res) => {
@@ -110,20 +120,19 @@ app.get('/restaurants/searches', (req, res) => {
 
 })
 
-
 app.get('/restaurants/:id', (req, res) => {
   const id = req.params.id
-
-  return Restaurant.findOne({ id: id })
+  return Restaurant.findById(id)
+    // Restaurant.findOne({ id: id }) --findOne用法
     .lean()
-    .then((restaurant) => res.render('show', { restaurant }))
+    .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
 })
 
+
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
-
-  return Restaurant.findOne({ id: id })
+  return Restaurant.findById(id)
     .lean()
     .then((restaurant) => res.render('edit', { restaurant }))
     .catch(error => console.log(error))

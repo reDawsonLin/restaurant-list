@@ -4,8 +4,8 @@
 <div class="container">
   <div class="row">
     <div class="col-12 col-md-10 col-lg-8 col-xl-7 mx-auto">
-      <div class="text-right">
-        <a href="/restaurants/{{ restaurant.id }}/edit" class="btn btn-primary btn-sm">Edit</a>
+      <div class="text-right mr-1">
+        <a href="/restaurants/{{ restaurant._id }}/edit" class="btn btn-primary btn-sm">Edit</a>
       </div>
 
       <p class="mb-1">
@@ -42,6 +42,12 @@
 
       <img class="rounded mx-auto d-block mb-4 w-100" src="{{restaurant.image}}" alt="{{restaurant.name}}"
         style="max-width: 600px;">
+      <div class="text-right mr-1">
+        <a href="/" class="btn btn-primary">Back</a>
+        <form action="/restaurants/{{ restaurant._id }}/delete" method="POST" style="display: inline;">
+          <button class="btn btn-danger " type="submit">Delete</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

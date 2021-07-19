@@ -1,71 +1,62 @@
-<h1 class="mb-1 restaurant-show-title">修改餐廳內容</h1>
-<div class="container mb-5">
-  <form action="/restaurants/{{ restaurant.id }}/edit" method="POST" class="needs-validation" novalidate>
-    <div class="form-row mb-3">
-      <div class="form-group col-md-6">
-        <label for="name"><i class="fas fa-home pr-2"></i>餐廳名稱</label>
-        <input type="text" class="form-control" name="name" id="name" placeholder="請輸入餐廳名稱" value="{{restaurant.name}}"
-          required>
-        <div class="invalid-feedback">
-          此為必填欄位!
-        </div>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="name_en"><i class="fas fa-home pr-2"></i>餐廳英文名稱</label>
-        <input type="text" class="form-control" name="name_en" id="name_en" placeholder="請輸入餐廳英文名稱"
-          value="{{restaurant.name_en}}">
-      </div>
-      <div class="form-group col-6 col-md-4">
-        <label for="category"><i class="fas fa-utensils pr-2"></i>類別</label>
-        <input list="categories" class="form-control" name="category" id="category" placeholder="請輸入餐廳類別"
-          value="{{restaurant.category}}" required>
+<h1 class="mb-1 restaurant-show-title">修改餐廳資訊</h1>
 
-        <div class="invalid-feedback">
-          此為必填欄位!
-        </div>
-      </div>
-      <div class="form-group col-6 col-md-4">
-        <label for="phone"><i class="fas fa-mobile-alt pr-2"></i>電話</label>
-        <input type="tel" class="form-control" name="phone" id="phone" placeholder="請輸入餐廳電話"
-          value="{{restaurant.phone}}" required>
-        <div class="invalid-feedback">
-          此為必填欄位!
-        </div>
-      </div>
-      <div class="form-group col-6 col-md-4">
-        <label for="rating"><i class="fas fa-star fa-xs pr-2"></i>評分</label>
-        <input type="number" step="0.1" class="form-control" min="0" max="5" name="rating" id="rating"
-          placeholder="請輸入0到5的數字，ex: 4.5" value="{{restaurant.rating}}" required>
-        <div class="invalid-feedback">
-          此為必填欄位!
-        </div>
-      </div>
-      <div class="form-group col-12">
-        <label for="location"><i class="fas fa-map-marked-alt pr-2"></i>地址</label>
-        <input type="text" class="form-control" name="location" id="location" placeholder="請輸入餐廳地址"
-          value="{{restaurant.location}}" required>
-        <div class="invalid-feedback">
-          此為必填欄位!
-        </div>
-      </div>
-      <div class="form-group col-12">
-        <label for="google_map"><i class="fas fa-map-marker-alt pr-2"></i>Google Map</label>
-        <input type="url" class="form-control" name="google_map" id="google_map" placeholder="請貼上餐廳的google-map網址"
-          value="{{restaurant.google_map}}">
-      </div>
-      <div class="form-group col-12">
-        <label for="image"><i class="fas fa-image pr-2"></i>照片</label>
-        <input type="text" class="form-control" name="image" id="image" placeholder="請貼上一張餐廳照片網址"
-          value="{{restaurant.image}}">
-      </div>
-      <div class="form-group col-12">
-        <label for="description"><i class="fas fa-book-open pr-2"></i>餐廳描述</label>
-        <textarea class="form-control" name="description" id="description"
-          placeholder="請輸入餐廳簡介">{{restaurant.description}}</textarea>
+<div class="container">
+  <form action="/restaurants/{{ restaurant._id }}/edit" method="POST" class="needs-validation w-50 mx-auto mt-5"
+    novalidate>
+    <div class="form-group">
+      <label for="name"><i class="fas fa-home mr-2"></i>餐廳名稱</label>
+      <input type="text" class="form-control" id="name" name="name" placeholder="請輸入餐廳名稱" value="{{restaurant.name}}"
+        required />
+    </div>
 
-      </div>
+    <div class="form-group">
+      <label for="name_en"><i class="fas fa-home mr-2"></i>餐廳名稱-English</label>
+      <input type="text" class="form-control" id="name_en" name="name_en" placeholder="請輸入餐廳英文名稱"
+        value="{{restaurant.name_en}}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="category"><i class="fas fa-utensils mr-2"></i>餐點風格</label>
+      <input type="text" class="form-control" id="category" name="category" placeholder="請輸入餐點風格"
+        value="{{restaurant.category}}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="image"><i class="fas fa-images mr-2"></i>照片集錦</label>
+      <input type="url" class="form-control" id="image" name="image" placeholder="請輸入照片連結" value="{{restaurant.image}}"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label for="location"><i class="fas fa-map-signs mr-2"></i>地址</label>
+      <input type="text" class="form-control" id="location" name="location" placeholder="請輸入餐廳地址"
+        value="{{restaurant.location}}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="phone"><i class="fas fa-phone-square mr-2"></i>餐廳電話</label>
+      <input type="tel" class="form-control" id="phone" name="phone" placeholder="請輸入餐廳電話" value="{{restaurant.phone}}"
+        required />
+    </div>
+
+    <div class="form-group">
+      <label for="google_map"><i class="fas fa-map-marked-alt mr-2"></i>Google Maps</label>
+      <input type="url" class="form-control" id="google_map" name="google_map" placeholder="請輸入google map網址"
+        value="{{restaurant.google_map}}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="rating"><i class="fas fa-star mr-2"></i>餐廳評價</label>
+      <input type="number" class="form-control" id="rating" name="rating" min="1" max="5" step="0.1"
+        placeholder="請輸入評分 1 ~ 5 分" value="{{restaurant.rating}}" required />
+    </div>
+
+    <div class="form-group">
+      <label for="description"><i class="fas fa-pencil-alt mr-2"></i>餐廳描述</label>
+      <textarea class="form-control" id="description" name="description" placeholder="請輸入餐廳描述"
+        required>{{ restaurant.description }}</textarea>
     </div>
     <button type="submit" class="btn btn-primary">Save</button>
-    <a href="/restaurants/{{restaurant.id}}" class="btn btn-primary">Back</a>
+    <a href="/restaurants/{{restaurant._id}}" class="btn btn-primary">Back</a>
   </form>
 </div>
