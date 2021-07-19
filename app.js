@@ -52,7 +52,6 @@ app.get('/restaurants/new', (req, res) => {
 
 
 
-
 app.post('/restaurants', (req, res) => {
   const name = req.body.name
   const name_en = req.body.name_en
@@ -67,6 +66,25 @@ app.post('/restaurants', (req, res) => {
   return Restaurant.create({ name, name_en, category, image, location, phone, google_map, rating, description })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
+})
+
+app.post('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findOne({ id: id })
+    .then(restaurant => {
+      restaurant.name = req.body.name
+      restaurant.name_en = req.body.name_en
+      restaurant.category = req.body.category
+      restaurant.image = req.body.image
+      restaurant.location = req.body.location
+      restaurant.google_map = req.body.google_map
+      restaurant.rating = req.body.rating
+      restaurant.phone = req.body.phone
+      restaurant.description = req.body.description
+      return restaurant.save()
+    })
+    .then((restaurant) => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error)) 
 })
 
 
@@ -102,21 +120,15 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
+app.get('/restaurants/:id/edit', (req, res) => {
+  const id = req.params.id
 
-// app.get('/restaurants/:restaurant_id', (req, res) => {
+  return Restaurant.findOne({ id: id })
+    .lean()
+    .then((restaurant) => res.render('edit', { restaurant }))
+    .catch(error => console.log(error))
+})
 
-//   const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurant_id)
-
-//   console.log(restaurant)
-
-//   if (restaurant === undefined) {
-//   return res.render('index', {
-//     errMsg: `<h3> 沒有這間餐廳囉~ </h3>`
-//     })
-//   }  
-
-//   res.render('show', {restaurant: restaurant}, )
-// })
 
 
 
