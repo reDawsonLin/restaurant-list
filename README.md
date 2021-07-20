@@ -28,6 +28,7 @@
 3. 進入存放專案的資料夾 cd restaurant-list-CRUD
 4. 安裝環境，在終端機輸入 npm i 
 5. 安裝套件，在終端機輸入 npm i express express-handlebars body-parser mongoose
+6. 在終端機，輸入 npm run seed
 7. 在終端機，輸入 npm run dev 
 8. 在網頁，輸入網址：localhost:3000
 
