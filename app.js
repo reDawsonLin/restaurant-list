@@ -7,8 +7,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const restaurantList = require('./restaurant.json')
 const Restaurant = require('./models/restaurant')
-
-
+const methodOverride = require('method-override')
 
 mongoose.connect('mongodb://localhost/restaurant-list', { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -23,34 +22,27 @@ db.once('open', () => {
   console.log('mongodb connected!')
 })
 
-
 // setting template engine
-app.engine('handlebars', exphbs({defaultLayout: 'main'}))
+app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-
 // setting static files
 app.use(express.static('public'))
+app.use(methodOverride('_method'))
 
 // routes setting
-
 app.get('/', (req, res) => {
   Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
     .catch(error => console.error(error))
-
 })
-
 
 app.get('/restaurants/new', (req, res) => {
   return res.render('new')
 })
-
-
-
 
 app.post('/restaurants', (req, res) => {
   const name = req.body.name
@@ -68,7 +60,7 @@ app.post('/restaurants', (req, res) => {
     .catch(error => console.log(error))
 })
 
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => {
@@ -84,20 +76,16 @@ app.post('/restaurants/:id/edit', (req, res) => {
       return restaurant.save()
     })
     .then((restaurant) => res.redirect(`/restaurants/${id}`))
-    .catch(error => console.log(error)) 
+    .catch(error => console.log(error))
 })
 
-
-
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
-  
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
-
 
 app.get('/restaurants/searches', (req, res) => {
   const keyword = req.query.keyword
@@ -105,7 +93,6 @@ app.get('/restaurants/searches', (req, res) => {
     return restaurant.name.toLowerCase().includes(keyword.toLowerCase()) || restaurant.category.toLowerCase().includes(keyword.toLowerCase())
   })
   // res.render('index', {restaurants: restaurants, keyword: keyword})
-  
   if (restaurants.length > 0) {
     res.render('index', {
       restaurants: restaurants,
@@ -114,10 +101,9 @@ app.get('/restaurants/searches', (req, res) => {
   } else {
     res.render('index', {
       keyword: keyword,
-      no_result: `<h3> 沒有"${req.query.keyword}"的搜尋結果</h3>`,
+      no_result: `<h3> 沒有"${req.query.keyword}"的搜尋結果</h3>`
     })
   }
-
 })
 
 app.get('/restaurants/:id', (req, res) => {
@@ -129,7 +115,6 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
 app.get('/restaurants/:id/edit', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
@@ -138,15 +123,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
     .catch(error => console.log(error))
 })
 
-
-
-
-
-
 // start and listen on the Express server
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
 })
-
-
-
