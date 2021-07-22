@@ -9,10 +9,20 @@ const routes = require('./routes')
 require('./config/mongoose')
 
 // setting template engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+  helpers: {
+    sort: function (select, selectValue) {
+      return select === selectValue ? 'selected' : ''
+    }
+  }
+
+}))
 app.set('view engine', 'handlebars')
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({
+  extended: true
+}))
 
 // setting static files
 app.use(express.static('public'))

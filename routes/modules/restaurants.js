@@ -12,7 +12,7 @@ router.get('/searches', (req, res) => {
     .then((restaurants) => {
       restaurants = restaurants.filter(
         (restaurant) =>
-          restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword)
+        restaurant.name.toLowerCase().includes(keyword) || restaurant.category.includes(keyword)
       )
       if (restaurants.length > 0) {
         return res.render('index', {
@@ -27,6 +27,22 @@ router.get('/searches', (req, res) => {
       }
     })
     .catch((error) => console.error(error))
+})
+
+// sort
+router.get('/sort', (req, res) => {
+  const {
+    select
+  } = req.query
+
+  Restaurant.find()
+    .lean()
+    .sort(select)
+    .then((restaurants) => res.render('index', {
+      restaurants,
+      select
+    }))
+    .catch((error) => console.log(error))
 })
 
 router.get('/new', (req, res) => {
@@ -45,16 +61,16 @@ router.post('/', (req, res) => {
   const description = req.body.description
 
   return Restaurant.create({
-    name,
-    name_en,
-    category,
-    image,
-    location,
-    phone,
-    google_map,
-    rating,
-    description
-  })
+      name,
+      name_en,
+      category,
+      image,
+      location,
+      phone,
+      google_map,
+      rating,
+      description
+    })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
