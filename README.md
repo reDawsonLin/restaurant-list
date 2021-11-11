@@ -1,5 +1,5 @@
 # restaurantList
-2.3-A2
+透過 Node.js/ Express/ MongoDB 打造餐廳推薦網站
 
 ## 功能介紹
 * 點擊每一張餐廳的卡片，即可瀏覽該餐廳的詳細資訊
