@@ -1,4 +1,4 @@
-# restaurantList
+# RestaurantList
 透過 Node.js/ Express/ MongoDB 打造餐廳推薦網站
 
 ## 功能介紹
