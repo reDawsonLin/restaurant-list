@@ -1,4 +1,4 @@
-# AC_2-3_restaurantList
+# restaurantList
 2.3-A2
 
 ## 功能介紹
